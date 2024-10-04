@@ -1,0 +1,17 @@
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\DAL.dll.config
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\DAL.dll
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\DAL.pdb
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\DTO.dll
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\Util.dll
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\EntityFramework.dll
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\DTO.pdb
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\DTO.dll.config
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\Util.pdb
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\EntityFramework.xml
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\obj\Debug\DAL.dll
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\obj\Debug\DAL.pdb
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrator\OneDrive\Máy tính\Hotel\DAL\bin\Debug\EntityFramework.SqlServer.xml

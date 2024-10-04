@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MangeHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="IdSatff" />
+    </Key>
+    <Property Name="IdSatff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="400" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Role" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="IdBooking" />
+    </Key>
+    <Property Name="IdBooking" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRoom" Type="int" />
+    <Property Name="IdCustomer" Type="int" />
+    <Property Name="IdCreater" Type="int" />
+    <Property Name="DateIn" Type="datetime" />
+    <Property Name="DateOut" Type="datetime" />
+    <Property Name="IdChange" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="IdCustomer" />
+    </Key>
+    <Property Name="IdCustomer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CCCD" Type="nchar" MaxLength="10" />
+    <Property Name="IsUse" Type="bit" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="IdInvoice" />
+    </Key>
+    <Property Name="IdInvoice" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdBooking" Type="int" />
+    <Property Name="Total" Type="float" />
+    <Property Name="IdCreater" Type="int" />
+    <Property Name="IsPaid" Type="bit" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="CCCD" />
+    </Key>
+    <Property Name="CCCD" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="400" />
+    <Property Name="Phone" Type="nchar" MaxLength="10" />
+    <Property Name="Address" Type="nchar" MaxLength="400" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="Birth" Type="date" />
+  </EntityType>
+  <EntityType Name="Receptionist">
+    <Key>
+      <PropertyRef Name="IdReceptionist" />
+    </Key>
+    <Property Name="IdReceptionist" Type="int" Nullable="false" />
+    <Property Name="CCCD" Type="nchar" MaxLength="10" />
+    <Property Name="Salary" Type="float" />
+    <Property Name="IsWork" Type="bit" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="IdRoom" />
+    </Key>
+    <Property Name="IdRoom" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameRoom" Type="nchar" MaxLength="10" />
+    <Property Name="IdType" Type="int" />
+    <Property Name="IdBooking" Type="int" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="IdService" />
+    </Key>
+    <Property Name="IdService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Cost" Type="float" />
+    <Property Name="IsUse" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TypeRoom">
+    <Key>
+      <PropertyRef Name="IdType" />
+    </Key>
+    <Property Name="IdType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GuestsMax" Type="int" />
+    <Property Name="HourlyRate" Type="float" />
+    <Property Name="NameType" Type="nvarchar(max)" />
+    <Property Name="IsUse" Type="bit" />
+  </EntityType>
+  <EntityType Name="UseService">
+    <Key>
+      <PropertyRef Name="IdUseService" />
+    </Key>
+    <Property Name="IdUseService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdBooking" Type="int" />
+    <Property Name="IdService" Type="int" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <Association Name="FK_Booking_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IdCustomer" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="IdCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_Receptionist">
+    <End Role="Receptionist" Type="Self.Receptionist" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receptionist">
+        <PropertyRef Name="IdReceptionist" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="IdCreater" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="IdRoom" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="IdRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="CCCD" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="CCCD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Booking">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="IdBooking" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="IdBooking" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Receptionist">
+    <End Role="Receptionist" Type="Self.Receptionist" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receptionist">
+        <PropertyRef Name="IdReceptionist" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="IdCreater" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receptionist_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Receptionist" Type="Self.Receptionist" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="IdSatff" />
+      </Principal>
+      <Dependent Role="Receptionist">
+        <PropertyRef Name="IdReceptionist" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Receptionist_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+    <End Role="Receptionist" Type="Self.Receptionist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="CCCD" />
+      </Principal>
+      <Dependent Role="Receptionist">
+        <PropertyRef Name="CCCD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_TypeRoom">
+    <End Role="TypeRoom" Type="Self.TypeRoom" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeRoom">
+        <PropertyRef Name="IdType" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="IdType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UseService_Booking">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+    <End Role="UseService" Type="Self.UseService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="IdBooking" />
+      </Principal>
+      <Dependent Role="UseService">
+        <PropertyRef Name="IdBooking" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UseService_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+    <End Role="UseService" Type="Self.UseService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="IdService" />
+      </Principal>
+      <Dependent Role="UseService">
+        <PropertyRef Name="IdService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MangeHotelModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receptionist" EntityType="Self.Receptionist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeRoom" EntityType="Self.TypeRoom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UseService" EntityType="Self.UseService" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Booking_Customer" Association="Self.FK_Booking_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_Receptionist" Association="Self.FK_Booking_Receptionist">
+      <End Role="Receptionist" EntitySet="Receptionist" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_Room" Association="Self.FK_Booking_Room">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Person" Association="Self.FK_Customer_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Booking" Association="Self.FK_Invoice_Booking">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Receptionist" Association="Self.FK_Invoice_Receptionist">
+      <End Role="Receptionist" EntitySet="Receptionist" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receptionist_Account" Association="Self.FK_Receptionist_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Receptionist" EntitySet="Receptionist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Receptionist_Person" Association="Self.FK_Receptionist_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Receptionist" EntitySet="Receptionist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_TypeRoom" Association="Self.FK_Room_TypeRoom">
+      <End Role="TypeRoom" EntitySet="TypeRoom" />
+      <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UseService_Booking" Association="Self.FK_UseService_Booking">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="UseService" EntitySet="UseService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UseService_Service" Association="Self.FK_UseService_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="UseService" EntitySet="UseService" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
